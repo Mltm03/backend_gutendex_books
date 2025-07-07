@@ -1,6 +1,7 @@
 package com.literalura.challenge.by.alura;
 
 import com.literalura.challenge.by.alura.principal.Principal;
+import com.literalura.challenge.by.alura.service.autorService;
 import com.literalura.challenge.by.alura.service.libroService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ public class ChallengeByAluraApplication implements CommandLineRunner {
 
 
 	@Autowired
-	private libroService service;
+	private libroService libroService;
+	@Autowired
+	private autorService autorService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(ChallengeByAluraApplication.class, args);
@@ -26,7 +29,7 @@ public class ChallengeByAluraApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Principal principal=new Principal(service);
+		Principal principal=new Principal(libroService,autorService);
 		principal.getMain();
 
 	}

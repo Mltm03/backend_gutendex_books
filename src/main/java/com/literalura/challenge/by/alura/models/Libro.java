@@ -11,11 +11,12 @@ public class Libro {
     private Long id;
 
     private String titulo;
-    private String autor;
     private String idioma;
     private Double totalDescargas;
 
-    
+    @ManyToOne // o @OneToOne, depende cómo lo mapees
+    @JoinColumn(name = "autor_id")
+    private Autor autor;
 
     public Libro() {
     }
@@ -24,9 +25,9 @@ public class Libro {
     public Libro(DatosLibro datos) {
 
         this.titulo = datos.titulo();
-        this.autor = datos.autores().stream().findFirst().map(DatosAutor::name).orElse(null);
         this.idioma = datos.idioma().stream().findFirst().orElse(null);
         this.totalDescargas = datos.totalDescargas();
+
 
     }
 
@@ -43,11 +44,11 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
